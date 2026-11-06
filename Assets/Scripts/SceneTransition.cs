@@ -52,10 +52,10 @@ public class SceneTransition : MonoBehaviour
         }
 
         //making sure the screen is fully black before switching scenes.
-        color.a = alpha;
+        color.a = 1f;
         fadeImage.color = color;
 
         //Load game scene (MAKE SURE THIS SCENE IS ADDED TO THE BUILD SETTINGS!!!)
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Game State");
     }
 }
