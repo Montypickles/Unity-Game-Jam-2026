@@ -30,7 +30,7 @@ public class GuessManager : MonoBehaviour  //Allows script to be attatchable.
 
         if (isNumber == false) //if tthey inputted letters this catches it.
         {
-            feedbackText.text = notNumberBanter[Range.Range(0, notNumberBanter.Length)];
+            feedbackText.text = notNumberBanter[Random.Range(0, notNumberBanter.Length)];
             playerInput.text = ""; //resets the Text Box.
             return; //Stops the code to avoid bottleneck.
         }
