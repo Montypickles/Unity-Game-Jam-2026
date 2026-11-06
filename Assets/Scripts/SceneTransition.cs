@@ -34,6 +34,8 @@ public class SceneTransition : MonoBehaviour
     {
         isTransitioning = true;
 
+        fadeImage.transform.SetAsLastSibling();
+
         float elapsedTime = 0f;
         Color color = fadeImage.color;
 
