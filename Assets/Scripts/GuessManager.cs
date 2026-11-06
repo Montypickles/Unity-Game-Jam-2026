@@ -36,7 +36,7 @@ public class GuessManager : MonoBehaviour  //Allows script to be attatchable.
         }
 
         //3. THE MATH: Grab the lucky file.
-        int correctNumber = targetManager.roundCurrent.targetNumber;
+        int correctNumber = targetManager.roundCurrent.luckyNumber;
 
         //4. THE WIN STATE.
         if (playerGuess == correctNumber)
