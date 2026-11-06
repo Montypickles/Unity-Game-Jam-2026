@@ -53,7 +53,7 @@ public class GuessManager : MonoBehaviour  //Allows script to be attatchable.
         //6. THE LOSE STATE (Too High)
         else if (playerGuess > correctNumber)
         {
-            feedbackText.text = tooHighBanter[Random,Range(0, tooHighBanter.Length)];
+            feedbackText.text = tooHighBanter[Random.Range(0, tooHighBanter.Length)];
         }
 
         //7. CLEANUP: Resetting the box for the next guess.
