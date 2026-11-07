@@ -1,62 +1,82 @@
-
 using UnityEngine;
-using TMPro; //Improrting TextMeshPro so we can control Modern UI text.
+using TMPro; // textmeshpro stuff
 
-public class GuessManager : MonoBehaviour  //Allows script to be attatchable. 
+public class GuessManager : MonoBehaviour 
 {
-    public TargetManager targetManager; //Connects to target manager to check what the lucky number is
-    public TMP_InputField playerInput; //Links the UI box to where the player actually type their guess.
-
-    public TextMeshProUGUI feedbackText; //Links the UI text to tell player "Too High" or "Too Low"
+    public TargetManager targetManager; 
+    public TMP_InputField playerInput; 
+    public TextMeshProUGUI feedbackText; 
 
     [Header("Brunos Banter List Scripts: Guess Manager")]
-    public string[] missingInputBanter; //When the user doesnt type anything.
-    public string[] notNumberBanter; //When the user puts any letter into the box.
-    public string[] winBanter; //When the user wins.
-    public string[] tooLowBanter; //When the user input is too low.
-    public string[] tooHighBanter; //When the user input is too high.
+    public string[] missingInputBanter; 
+    public string[] notNumberBanter; 
+    public string[] winBanter; 
+    public string[] tooLowBanter; 
+    public string[] tooHighBanter; 
+    public string[] gameOverBanter; 
+
+    private int failedAttempts = 0; 
+    private bool isGameOver = false; // master lock to freeze the game
+
     public void CheckGuess()
     {
-        //1. Saftey Check: Did they type anything?
+        // if the game ended, ignore all button clicks
+        if (isGameOver) return;
+
+        // if they didn't type anything
         if (string.IsNullOrEmpty(playerInput.text))
         {
             feedbackText.text = missingInputBanter[Random.Range(0, missingInputBanter.Length)];
             return;    
         }
 
-        //2. Saftey Check: Did they type something other than a number?
-        int playerGuess; //Creating an empty bucket for the number
-        bool isNumber = int.TryParse(playerInput.text, out playerGuess); //Tries to safely turn the text into math.
+        // catch letters and symbols
+        int playerGuess; 
+        bool isNumber = int.TryParse(playerInput.text, out playerGuess); 
 
-        if (isNumber == false) //if tthey inputted letters this catches it.
+        if (isNumber == false) 
         {
             feedbackText.text = notNumberBanter[Random.Range(0, notNumberBanter.Length)];
-            playerInput.text = ""; //resets the Text Box.
-            return; //Stops the code to avoid bottleneck.
+            playerInput.text = ""; 
+            return; 
         }
 
-        //3. THE MATH: Grab the lucky file.
+        // grab the target number
         int correctNumber = targetManager.roundCurrent.luckyNumber;
 
-        //4. THE WIN STATE.
+        // win state
         if (playerGuess == correctNumber)
         {
             feedbackText.text = winBanter[Random.Range(0, winBanter.Length)];
+            isGameOver = true; // flip the master lock
+            playerInput.interactable = false; // gray out the text box
+            return; 
         }
 
-        //5. THE LOSE STATE. (Too Small)
-        else if (playerGuess < correctNumber)
+        // add a strike
+        failedAttempts++;
+
+        // 5 strikes and you're out
+        if (failedAttempts >= 5)
+        {
+            feedbackText.text = gameOverBanter[Random.Range(0, gameOverBanter.Length)];
+            isGameOver = true; // flip the master lock
+            playerInput.interactable = false; // gray out the text box so they can't type
+            return; 
+        }
+
+        // too small
+        if (playerGuess < correctNumber)
         {
             feedbackText.text = tooLowBanter[Random.Range(0, tooLowBanter.Length)];
         }
-
-        //6. THE LOSE STATE (Too High)
+        // too big
         else if (playerGuess > correctNumber)
         {
-            feedbackText.text = tooHighBanter[Random,Range(0, tooHighBanter.Length)];
+            feedbackText.text = tooHighBanter[Random.Range(0, tooHighBanter.Length)];
         }
 
-        //7. CLEANUP: Resetting the box for the next guess.
+        // clear the box for next time
         playerInput.text = "";
     }
 }

@@ -1,44 +1,58 @@
-using System.Collections.Generic; //allows use of flexible lists that can shrink when we remove used hints.
+using System.Collections.Generic; 
 using UnityEngine;
+using TMPro; // textmeshpro stuff for the hints counter
 
-public class HintManager : MonoBehaviour // Makes script attachable to GameObjects
+public class HintManager : MonoBehaviour 
 {
-    public TargetManager targetmanager; //Connects the other Script "TargetManager", so the Script can see which round active.
+    public TargetManager targetmanager; 
+    public DialogueManager dialogueManager; // plugs into Bruno's speech bubble
+    public TextMeshProUGUI hintsRemainingText; // bottom-left UI counter
 
     private List<string> hintsUnused = new List<string>(); 
-    //Will create a tempry list to hold hits (elements) not yet displayed.
     private int givenHints = 0; 
-    //Tracks the amount of hints the player has been given in a particular round.
     private int maxHints = 5; 
-    //Sets a limit for the amount of hints used in one round.
 
-    public void hintsSetup() //Function: Run this to get hints ready
+    private void Start()
     {
-        hintsUnused.Clear(); //emptys out all the leftover hints from the previous round.
-        hintsUnused.AddRange(targetmanager.roundCurrent.hints); // Copys Pickles hints into temp list.
-        givenHints = 0; //resets counter to zero at the beginning of a new round.
+        // automatically loads the hints when the round starts
+        hintsSetup();
+    }
+
+    public void hintsSetup() 
+    {
+        hintsUnused.Clear(); 
+        hintsUnused.AddRange(targetmanager.roundCurrent.hints); 
+        givenHints = 0; 
+        UpdateHintCounter();
     } 
     
-    public void randomHint() //Function: Will run at the beggining to of new round.
+    public void randomHint() 
     {
-        if (givenHints >= maxHints) //Checks if the player has used all their hints.
+        // if they used all 5 hints (or the list is empty), Bruno roasts them
+        if (givenHints >= maxHints || hintsUnused.Count == 0) 
         {
-            Debug.Log("Wow... you have used all the hints and want more?"); //Stops player from getting more hints.
-            return; //ends function
-        }
-        if (hintsUnused.Count == 0) //ensures that we havent accidently ran out of hints.
-        {
-            Debug.Log("Out of unique hints!"); //Tells the console there is no more lists in the hints.
-            return; //ends function.
+            dialogueManager.SayOutOfHints(); 
+            return; 
         }
 
+        // pick a random unused hint and send it to Bruno's speech bubble
         int randomIndex = Random.Range(0, hintsUnused.Count);
-        //Picks a random position for the remaining unused hints.
         string hintChosen = hintsUnused[randomIndex];
-        //Grabs the specific text from that random position.
-        Debug.Log("Hint: " + hintChosen); //Displays hint to player.
+        dialogueManager.SayHint(hintChosen); 
 
+        // remove it so it doesn't repeat and tick the counter up
         hintsUnused.RemoveAt(randomIndex);
         givenHints++;
+        UpdateHintCounter();
     } 
-} 
+
+    private void UpdateHintCounter()
+    {
+        // updates the bottom-left text if Pickles plugged it in
+        if (hintsRemainingText != null)
+        {
+            int remaining = maxHints - givenHints;
+            hintsRemainingText.text = "Hints Remaining: " + remaining;
+        }
+    }
+}
