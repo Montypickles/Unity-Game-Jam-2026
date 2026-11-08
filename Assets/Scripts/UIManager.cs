@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         //Setting timer to 30s, and fills it up completely to start.
+        timerSlider = GetComponent<Slider>();
         timerSlider.maxValue = maxTime;
         StartTimer();
     }
