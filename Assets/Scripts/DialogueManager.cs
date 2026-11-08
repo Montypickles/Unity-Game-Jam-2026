@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public string[] blankInputInsults;
     public string[] letterInputInsults;
     public string[] outOfHintsInsults;
+    public string[] timeoutInsults;
 
     [Header("Bruno's Final Strike")]
     public string[] finalStrikeInsults; 
@@ -93,6 +94,12 @@ public class DialogueManager : MonoBehaviour
     {
         brunoSpeechBubble.text = theHint; 
     }
+
+    //12. TOO LONG
+    public void SayTimeout()
+    {
+        brunoSpeechBubble.text = GetSafeRandomLine(timeoutInsults);
+    } 
 
     //Setting up saftey
     private string GetSafeRandomLine(string[] dialogueList)

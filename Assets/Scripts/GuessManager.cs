@@ -6,6 +6,7 @@ public class GuessManager : MonoBehaviour
     public TargetManager targetManager; 
     public TMP_InputField playerInput; 
     public TextMeshProUGUI feedbackText; 
+    public UIManager uiManager;
 
     [Header("Brunos Banter List Scripts: Guess Manager")]
     public string[] missingInputBanter; 
@@ -16,7 +17,7 @@ public class GuessManager : MonoBehaviour
     public string[] gameOverBanter; 
 
     private int failedAttempts = 0; 
-    private bool isGameOver = false; // master lock to freeze the game
+    public bool isGameOver = false; // master lock to freeze the game
 
     public void CheckGuess()
     {
@@ -50,6 +51,7 @@ public class GuessManager : MonoBehaviour
             feedbackText.text = winBanter[Random.Range(0, winBanter.Length)];
             isGameOver = true; // flip the master lock
             playerInput.interactable = false; // gray out the text box
+            uiManager.StopTimer();
             return; 
         }
 
@@ -79,4 +81,10 @@ public class GuessManager : MonoBehaviour
         // clear the box for next time
         playerInput.text = "";
     }
+    public void TriggerGameOver()
+    {
+        isGameOver = true;
+        playerInput.interactable = false;
+    }
+    
 }
