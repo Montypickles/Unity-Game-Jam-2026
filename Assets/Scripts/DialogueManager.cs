@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
     public string[] winDialogue;
     
     [Header("Bruno's Guessing Insults")]
-    public string[] tooLowInsluts;
+    public string[] tooLowInsults;
     public string[] tooHighInsults;
     public string[] blankInputInsults;
     public string[] letterInputInsults;
