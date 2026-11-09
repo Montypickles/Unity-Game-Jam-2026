@@ -78,8 +78,7 @@ public class GuessManager : MonoBehaviour
         if (failedAttempts >= 5)
         {
             feedbackText.text = gameOverBanter[Random.Range(0, gameOverBanter.Length)];
-            isGameOver = true; // flip the master lock
-            playerInput.interactable = false; // gray out the text box so they can't type
+            TriggerGameOver();
             return; 
         }
 
@@ -99,8 +98,15 @@ public class GuessManager : MonoBehaviour
     }
     public void TriggerGameOver()
     {
+        if (isGameOver) return;
+
         isGameOver = true;
         playerInput.interactable = false;
+
+        if (uiManager != null)
+        {
+            uiManager.ShowLosePanel();
+        }
     }
 
     /*

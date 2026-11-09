@@ -22,6 +22,19 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    [Header("Lose Screen")]
+    public GameObject losePanel;
+
+    public void ShowLosePanel()
+    {
+        StopTimer();
+
+        if (losePanel != null)
+        {
+            losePanel.SetActive(true);
+        }
+    }
+
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene("Main Menu");
