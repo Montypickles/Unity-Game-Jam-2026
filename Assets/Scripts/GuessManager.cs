@@ -62,11 +62,13 @@ public class GuessManager : MonoBehaviour
         // win state
         if (playerGuess == correctNumber)
         {
-            feedbackText.text = winBanter[Random.Range(0, winBanter.Length)];
-            isGameOver = true; // flip the master lock
-            playerInput.interactable = false; // gray out the text box
+            isGameOver = true;
+            playerInput.interactable = false;
+
             uiManager.StopTimer();
-            return; 
+            uiManager.ShowWinPanel();
+
+            return;
         }
 
         // add a strike
