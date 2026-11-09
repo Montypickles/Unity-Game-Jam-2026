@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        //Debug.Log("TIMER started");
+
         // Auto-grab custom pixel bar if the script is attached to it.
         if (pixelProgressBar == null) 
         {
@@ -25,6 +27,8 @@ public class UIManager : MonoBehaviour
         }
 
         StartTimer();
+
+        //Debug.Log("timer: "+ currentTime + " seconds");
     }
 
     private void Update()
@@ -33,6 +37,7 @@ public class UIManager : MonoBehaviour
         if (!isTimerRunning || guessManager.isGameOver) return;
         
         currentTime -= Time.deltaTime; // Drain time on seconds not framerate.
+        //Debug.Log("timer: " + currentTime + " seconds");
 
         // Update custom Pixel Bar to match hidden math (percentage: 1.0 down to 0.0).
         if (pixelProgressBar != null) 

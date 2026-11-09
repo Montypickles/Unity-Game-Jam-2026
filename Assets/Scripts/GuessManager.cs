@@ -86,14 +86,18 @@ public class GuessManager : MonoBehaviour
         isGameOver = true;
         playerInput.interactable = false;
     }
-    
+
+    /*
     private void Update()
     {
+        
         //If they hit enter the input is taken
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KaypadEnter))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             CheckGuess();
             playerInput.ActivateInputField(); //Keeps typing Curser active.
         }
+       
     }
+    */
 }
