@@ -7,7 +7,7 @@ namespace HeyHeyThere.PixelUIFree
     /// whole pixels, as Godot's ProgressBar draws it.
     /// </summary>
     [ExecuteAlways]
-    public class PixelBar : MonoBehaviour
+    public class timerSlider : MonoBehaviour
     {
         [Range(0, 1)] public float value = 0.5f;
         public RectTransform fill;
