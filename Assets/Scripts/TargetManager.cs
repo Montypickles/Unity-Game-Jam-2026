@@ -12,6 +12,7 @@ public class TargetManager : MonoBehaviour { //Makes the script be attachable to
     
     public void SelectRandomRound() //Function: randomly picks the game.
     {
+        if (roundAvailable == null || roundAvailable.length == 0) return;
         int randomIndex = Random.Range(0, roundAvailable.Length); //Picks a random number between 0 and how many files Pickles inserted.
         roundCurrent = roundAvailable[randomIndex]; //Grabs the "winning" file and locks it in for the round.
     }

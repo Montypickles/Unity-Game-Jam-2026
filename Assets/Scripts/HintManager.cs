@@ -15,7 +15,7 @@ public class HintManager : MonoBehaviour
     private void Start()
     {
         // automatically loads the hints when the round starts
-        if (targetManager == null) targetmanager = FindObjectOfType<TargetManager>();
+        if (targetmanager == null) targetmanager = FindObjectOfType<TargetManager>();
         if (dialogueManager == null) dialogueManager = FindObjectOfType<DialogueManager>();
         if(guessManager == null) guessManager = FindObjectOfType<GuessManager>();
         hintsSetup();
@@ -23,8 +23,11 @@ public class HintManager : MonoBehaviour
 
     public void hintsSetup() 
     {
-        hintsUnused.Clear(); 
-        hintsUnused.AddRange(targetmanager.roundCurrent.hints); 
+        hintsUnused.Clear();
+        if (targetmanager != null && targetmanager.roundCurrent != null)
+        {
+             hintsUnused.AddRange(targetmanager.roundCurrent.hints);
+        }  
         givenHints = 0; 
         UpdateHintCounter();
     } 

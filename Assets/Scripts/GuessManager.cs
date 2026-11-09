@@ -50,7 +50,7 @@ public class GuessManager : MonoBehaviour
 
         if (targetManager != null && targetManager.roundCurrent == null)
         {
-            targetManager.SelecRandomRound();
+            targetManager.SelectRandomRound();
         }
         
         if (targetManager == null || targetManager.roundCurrent == null) return;
