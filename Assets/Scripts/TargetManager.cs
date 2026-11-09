@@ -5,7 +5,7 @@ public class TargetManager : MonoBehaviour { //Makes the script be attachable to
 
     public NumberData roundCurrent; //Stores the specific file that will store the current Lucky Number
 
-    void Start() //Will run automatically when the game starts
+    void Awake() //Will run automatically when the game starts
     {
         SelectRandomRound(); //Triggers the custom logic, in order to pick the level (the lucky number)
     }

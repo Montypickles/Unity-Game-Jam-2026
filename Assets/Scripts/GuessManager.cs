@@ -19,6 +19,12 @@ public class GuessManager : MonoBehaviour
     private int failedAttempts = 0; 
     public bool isGameOver = false; // master lock to freeze the game
 
+    void Start()
+    {
+        if (targetManager == null) targetManager = FindObjectOfType<TargetManager>();
+        if (uiManager == null) uiManager = FindObjectOfType<UIManager>();
+    }
+
     public void CheckGuess()
     {
         // if the game ended, ignore all button clicks
@@ -42,6 +48,14 @@ public class GuessManager : MonoBehaviour
             return; 
         }
 
+        if (targetManager != null && targetManager.roundCurrent == null)
+        {
+            targetManager.SelecRandomRound();
+        }
+        
+        if (targetManager == null || targetManager.roundCurrent == null) return;
+       
+       
         // grab the target number
         int correctNumber = targetManager.roundCurrent.luckyNumber;
 

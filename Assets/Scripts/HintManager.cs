@@ -7,7 +7,7 @@ public class HintManager : MonoBehaviour
     public TargetManager targetmanager; 
     public DialogueManager dialogueManager; // plugs into Bruno's speech bubble
     public TextMeshProUGUI hintsRemainingText; // bottom-left UI counter
-
+    public GuessManager guessManager;
     private List<string> hintsUnused = new List<string>(); 
     private int givenHints = 0; 
     private int maxHints = 5; 
@@ -15,6 +15,9 @@ public class HintManager : MonoBehaviour
     private void Start()
     {
         // automatically loads the hints when the round starts
+        if (targetManager == null) targetmanager = FindObjectOfType<TargetManager>();
+        if (dialogueManager == null) dialogueManager = FindObjectOfType<DialogueManager>();
+        if(guessManager == null) guessManager = FindObjectOfType<GuessManager>();
         hintsSetup();
     }
 
@@ -32,6 +35,7 @@ public class HintManager : MonoBehaviour
         if (givenHints >= maxHints || hintsUnused.Count == 0) 
         {
             dialogueManager.SayOutOfHints(); 
+            if (guessManager != null) guessManager.TriggerGameOver();
             return; 
         }
 
