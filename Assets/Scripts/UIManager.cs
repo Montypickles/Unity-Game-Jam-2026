@@ -11,6 +11,35 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI timerCountdownText; //This is for the 30 sec demo text box.
     public TMP_InputField playerInput; //This is the textbox the player inputs the text too as we need to clear it.
 
+    [Header("Win Screen")]
+    public GameObject winPanel;
+
+    public void ShowWinPanel()
+    {
+        if (winPanel != null)
+        {
+            winPanel.SetActive(true);
+        }
+    }
+
+    [Header("Lose Screen")]
+    public GameObject losePanel;
+
+    public void ShowLosePanel()
+    {
+        StopTimer();
+
+        if (losePanel != null)
+        {
+            losePanel.SetActive(true);
+        }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+
     [Header("Script Referances")]
     public GuessManager guessManager;
     public HintManager hintManager;

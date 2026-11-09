@@ -26,7 +26,9 @@ public class DialogueManager : MonoBehaviour
         if (brunoSpeechBubble == null)
         {
             Debug.LogError("PICKLES: You forgot to add a script cuh");
+            return;
         }
+        sayGreeting();
     }
     
     //1. GAME START
