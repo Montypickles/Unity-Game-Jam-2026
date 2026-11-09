@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("UI ELements & Components")]
     public timerSlider pixelProgressBarSlider; //The green bar object placed here.
-    public TextMeshProGUI timerCountdownText; //This is for the 30 sec demo text box.
+    public TextMeshProUGUI timerCountdownText; //This is for the 30 sec demo text box.
     public TMP_InputField playerInput; //This is the textbox the player inputs the text too as we need to clear it.
 
     [Header("Script Referances")]
