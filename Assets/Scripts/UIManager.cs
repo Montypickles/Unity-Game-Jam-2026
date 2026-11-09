@@ -1,17 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI; // Required import for the SLider and slider UI.
 using HeyHeyThere.PixelUIFree; // Required import for the custom downloaded pixel bar.
 
 public class UIManager : MonoBehaviour
 {
     [Header("UI Elements")]
-    [Tooltip("Plug a standard Unity Slider in here.")]
-    public Slider timerSlider;
-    
     [Tooltip("Plug the custom downloaded pixel bar in here.")]
-    public timerSlider customPixelBar; 
+    public timerSlider pixelProgressBar; 
 
-    [Header("Script Referances")]
+    [Header("Script References")]
     public GuessManager guessManager;
     public DialogueManager dialogueManager;
 
@@ -22,22 +18,10 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        // Auto-grab standard slider if the script is attached to it.
-        if (timerSlider == null) 
-        {
-            timerSlider = GetComponent<Slider>();
-        }
-        
         // Auto-grab custom pixel bar if the script is attached to it.
-        if (customPixelBar == null) 
+        if (pixelProgressBar == null) 
         {
-            customPixelBar = GetComponent<timerSlider>();
-        }
-
-        // Setting timer max value, and fills it up completely to start.
-        if (timerSlider != null)
-        {
-            timerSlider.maxValue = maxTime;
+            pixelProgressBar = GetComponent<timerSlider>();
         }
 
         StartTimer();
@@ -49,17 +33,11 @@ public class UIManager : MonoBehaviour
         if (!isTimerRunning || guessManager.isGameOver) return;
         
         currentTime -= Time.deltaTime; // Drain time on seconds not framerate.
-        
-        // Update standard Unity slider bar to match hidden math (150 down to 0).
-        if (timerSlider != null)
-        {
-            timerSlider.value = currentTime; 
-        }
 
         // Update custom Pixel Bar to match hidden math (percentage: 1.0 down to 0.0).
-        if (customPixelBar != null) 
+        if (pixelProgressBar != null) 
         {
-            customPixelBar.value = currentTime / maxTime; 
+            pixelProgressBar.value = currentTime / maxTime; 
         }
 
         // IF: checking if the player has ran out of time.
@@ -74,9 +52,8 @@ public class UIManager : MonoBehaviour
     {
         currentTime = maxTime;
         
-        // Reset whichever bars actually exist on the screen.
-        if (timerSlider != null) timerSlider.value = currentTime;
-        if (customPixelBar != null) customPixelBar.value = 1f; // 1f = 100% full
+        // Reset the bar to 100% full.
+        if (pixelProgressBar != null) pixelProgressBar.value = 1f; 
         
         isTimerRunning = true;
     }
@@ -92,9 +69,8 @@ public class UIManager : MonoBehaviour
         StopTimer();
         currentTime = 0; // Locking the timeout at 0.
         
-        // Empty whichever bars actually exist.
-        if (timerSlider != null) timerSlider.value = 0;
-        if (customPixelBar != null) customPixelBar.value = 0f; // 0f = completely empty
+        // Empty the bar.
+        if (pixelProgressBar != null) pixelProgressBar.value = 0f; 
 
         guessManager.TriggerGameOver();
         // Telling GuessManager to lock text box at the end of the game.
