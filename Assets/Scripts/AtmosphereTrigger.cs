@@ -13,6 +13,7 @@ public class AtmosphereTrigger : MonoBehaviour
 
     public void NextAtmosphere() 
     {
+        Debug.Log("Button was clicked! Current stage is: " + currentStage);
         // Only swap if we haven't reached the end of the array
         if (currentStage < backgroundImages.Length) 
         {
