@@ -1,130 +1,155 @@
 using UnityEngine;
-using UnityEngine.UI; 
-// Lets UIManager directly shrink the UI bar Image 
-using HeyHeyThere.PixelUIFree; // Kept for the HeyHeyThere Pixel UI asset pack 
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
+using HeyHeyThere.PixelUIFree;
+using System.Collections;
 
-public class UIManager : MonoBehaviour 
-{ 
-    [Header("UI Elements")]
-    [Tooltip("Drag the Fill child Image (under GreenBar) in here.")] 
-    public Image pixelProgressBar; 
-    
-    [Header("Script References")] 
+public class UIManager : MonoBehaviour
+{
+    [Header("UI ELements & Components")]
+    public timerSlider pixelProgressBarSlider; //The green bar object placed here.
+    public TextMeshProGUI timerCountdownText; //This is for the 30 sec demo text box.
+    public TMP_InputField playerInput; //This is the textbox the player inputs the text too as we need to clear it.
+
+    [Header("Script Referances")]
     public GuessManager guessManager;
-    public DialogueManager dialogueManager; 
-    
-    [Header("Timer Settings")] 
-    public float maxTime = 150f; // 2mins 30seconds per game. 
-    private float currentTime; 
-    private bool isTimerRunning = false; 
-    private Vector3 initialScale = Vector3.one; 
+    public HintManager hintManager;
+    public DialogueManager dialogueManager;
 
-    private void Start() 
-    { 
-        // Auto-find managers so Update() never crashes with a NullReferenceException 
-        if (guessManager == null) 
-            guessManager = FindObjectOfType<GuessManager>(); 
-            
-        if (dialogueManager == null) 
-            dialogueManager = FindObjectOfType<DialogueManager>(); 
-            
-        // Auto-grab the Image if this script was placed directly on the bar 
-        if (pixelProgressBar == null) 
-        { 
-            pixelProgressBar = GetComponent<Image>(); 
-        } 
-        
-        if (pixelProgressBar != null) 
-        { 
-            // Stop the HeyHeyThere timerSlider or Unity Slider on the parent from overriding our bar! 
-            timerSlider customSlider = pixelProgressBar.GetComponentInParent<timerSlider>(); 
-            if (customSlider != null) 
-                customSlider.enabled = false; 
-                
-            Slider unitySlider = pixelProgressBar.GetComponentInParent<Slider>(); 
-            if (unitySlider != null) 
-                unitySlider.enabled = false; 
-                
-            initialScale = pixelProgressBar.rectTransform.localScale; 
-            if (initialScale.x == 0f) 
-                initialScale = Vector3.one; 
-                
-            // If it has a sprite, also configure Image.Type.Filled 
-            if (pixelProgressBar.sprite != null) 
-            { 
-                pixelProgressBar.type = Image.Type.Filled;
-                pixelProgressBar.fillMethod = Image.FillMethod.Horizontal;
-                pixelProgressBar.fillOrigin = (int)Image.OriginHorizontal.Left; 
-            } 
-        } 
-        
+    [Header("Timer Settings")]
+    public float maxTime = 150f; //2 mins 30 sec.
+    private float currentTime;
+    private bool isTimerRunning = false;
+
+    private void Start()
+    {
+        //Auto-find the referance if left unassigned in the inspector.
+        if (guessManager == null) guessManager = FindObjectOfType<GuessManager>();
+        if (hintManager == null) hintManager = FindObjectOfType<HintManager>();
+        if (dialogueManager == null) dialogueManager = FindObjectOfType<HintManager>();
+        if (playerInput == null) playerInput = FindObjectOfType<TMP_InputField>();
+        if (pixelProgressBarSlider == null) pixelProgressBarSlider = FindObjectOfType<timerSlider>();
+
+        //Show bar at 100% and at 2:30 on setup.
+        currentTime = maxTime;
+        UpdateTimerDisplay();
+        if (pixelProgressBarSlider != null)
+        {
+            pixelProgressBarSlider.value = 1f;
+        }
+
+        //give a two second delay when loading up the secene before the timer starts counting down for scene transition to stop
+        //and player to registered the games loaded.
+        StartCoroutine(StartTimerWithDelay(2f));
+    }
+
+    private IEnumerator StartTimerWithDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
         StartTimer();
-    } 
+    }
 
-    private void Update() 
-    { 
-        // IF: timer has stopped, or the game is over, do nothing. 
-        if (!isTimerRunning || (guessManager != null && guessManager.isGameOver))
-            return; 
-            
-        currentTime -= Time.deltaTime; // Drain time in seconds, not framerate. 
-        
-        // Shrink the bar image from 1.0 (100%) down to 0.0 (0%) 
-        SetBarFill(currentTime / maxTime); 
-        
-        // IF: checking if the player has run out of time. 
-        if (currentTime <= 0) 
-        { 
-            TriggerTimeout(); 
-        } 
-    } 
+    private void update()
+    {
+        //Do nothing if the timer has stopped or game is over.
+        if (!isTimerRunning || (guessManager != null && guessManager.isGameOver)) return;
 
-    public void StartTimer() 
-    { 
-        if (maxTime <= 0f) 
-            maxTime = 150f; 
-            
-        currentTime = maxTime; 
-        SetBarFill(1f); // Reset the bar image to 100% full. 
-        isTimerRunning = true; 
-    } 
+        //Count down time.
+        currentTime -= Time.deltaTime;
 
-    public void StopTimer() 
-    { 
-        isTimerRunning = false; 
-    } 
+        //1. Update the Pixel Progress Bar using the assets built in value.
+        if (pixelProgressBarSlider != null)
+        {
+            pixelProgressBarSlider.value = Mathf.Clamp01(currentTime / maxTime);
+        }
 
-    private void TriggerTimeout() 
-    { 
-        StopTimer(); 
-        currentTime = 0; 
-        SetBarFill(0f); // Empty the bar image completely. 
-        
+        //2. Update the Mins:Sec display on screen without milliseconds.
+        UpdateTimerDisplay();
+
+        //3. Check for timeout
+        if (currentTime <= 0)
+        {
+            TriggerTimeout();
+        }
+    }
+
+    public void StopTimer()
+    {
+        isTimerRunning = false;
+    }
+
+    private void UpdateTimerDisplay()
+    {
+        if (timerCountdownText == null) return;
+
+        //Setting up the format so theres no .00 in the timer.
+        int mins = Mathf.FloorToInt(currentTime / 60f);
+        ins sec = Mathf.FloorToInt(currentTime % 60f);
+        timerCountdownText.text = string.Format("{0:00}:{1.00}", minutes, seconds);
+    }
+
+    private void TriggerTimeout()
+    {
+        StopTimer();
+        currentTime = 0f;
+
+        if (pixelProgressBarSlider != null)
+        {
+            pixelProgressBarSlider.value = 0f;
+        }
+
         if (guessManager != null)
-            guessManager.TriggerGameOver(); 
-            
-        if (dialogueManager != null)
-            dialogueManager.SayTimeout(); 
-    } 
+        {
+            guessManager.TriggerGameOver();
+        }
 
-    // Directly shrinks the bar image whether it uses a HeyHeyThere sprite or a solid color block 
-    private void SetBarFill(float normalizedValue) 
-    { 
-        if (pixelProgressBar == null) 
-            return; 
-            
-        float clamped = Mathf.Clamp01(normalizedValue); 
-        
-        if (pixelProgressBar.sprite != null && pixelProgressBar.type == Image.Type.Filled) 
-        { 
-            pixelProgressBar.fillAmount = clamped; 
-        } 
-        
-        // Also scale the width directly so the green bar image is guaranteed to shrink visually 
-        pixelProgressBar.rectTransform.localScale = new Vector3(
-            initialScale.x * clamped, 
-            initialScale.y, 
-            initialScale.z 
-        ); 
-    } 
+        if (dialogueManager != null)
+        {
+            dialogueManager.SayTimeout();
+        }
+    }
+
+    //BUTTON WIRING AND INPUT HELPERS.
+
+    //Hook this method up to your Confirm/Guess button OnClick() in the inspector.
+    public void OnSubmitGuessClicked()
+    {
+        if (guessManager != null)
+        {
+            guessManager.CheckGuess();
+        }
+
+        ClearInput();
+    }
+
+    //Hook this method up on the Hint button OnClick() in the inspector
+    public void OnRequestHintClicked()
+    {
+        if (hintManager != null)
+        {
+            hintManager.randomHint();
+        }
+    }
+
+    //CLears the input box and keeps cursor active for continuious typing.
+    public void ClearInput()
+    {
+        if (playerInput != null)
+        {
+            playerInput.text = "";
+            playerInput.ActiveInputField();
+        }
+    }
+
+    // SCENE MANAGEMENT HOOKS.
+
+    public void RestartCurrentScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
+/*
+
+
+*/
