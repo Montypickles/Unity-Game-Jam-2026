@@ -21,8 +21,8 @@ public class GuessManager : MonoBehaviour
 
     void Start()
     {
-        if (targetManager == null) targetManager = FindObjectOfType<TargetManager>();
-        if (uiManager == null) uiManager = FindObjectOfType<UIManager>();
+        if (targetManager == null) targetManager = FindAnyObjectByType<TargetManager>();
+        if (uiManager == null) uiManager = FindAnyObjectByType<UIManager>();
     }
 
     public void CheckGuess()

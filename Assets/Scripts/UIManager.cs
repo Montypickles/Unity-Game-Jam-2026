@@ -2,13 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using HeyHeyThere.PixelUIFree;
 using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
     [Header("UI ELements & Components")]
-    public timerSlider pixelProgressBarSlider; //The green bar object placed here.
+    public Image pixelProgressBarSlider; // We are using the standard Unity Image now!
     public TextMeshProUGUI timerCountdownText; //This is for the 30 sec demo text box.
     public TMP_InputField playerInput; //This is the textbox the player inputs the text too as we need to clear it.
 
@@ -25,18 +24,19 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         //Auto-find the referance if left unassigned in the inspector.
-        if (guessManager == null) guessManager = FindObjectOfType<GuessManager>();
-        if (hintManager == null) hintManager = FindObjectOfType<HintManager>();
-        if (dialogueManager == null) dialogueManager = FindObjectOfType<HintManager>();
-        if (playerInput == null) playerInput = FindObjectOfType<TMP_InputField>();
-        if (pixelProgressBarSlider == null) pixelProgressBarSlider = FindObjectOfType<timerSlider>();
+        if (guessManager == null) guessManager = FindAnyObjectByType<GuessManager>();
+        if (hintManager == null) hintManager = FindAnyObjectByType<HintManager>();
+        if (dialogueManager == null) dialogueManager = FindAnyObjectByType<DialogueManager>();
+        if (playerInput == null) playerInput = FindAnyObjectByType<TMP_InputField>();
+        
+        // Note: You MUST manually drag the 'Fill' child object into the Inspector slot for the slider!
 
         //Show bar at 100% and at 2:30 on setup.
         currentTime = maxTime;
         UpdateTimerDisplay();
         if (pixelProgressBarSlider != null)
         {
-            pixelProgressBarSlider.value = 1f;
+            pixelProgressBarSlider.fillAmount = 1f;
         }
 
         //give a two second delay when loading up the secene before the timer starts counting down for scene transition to stop
@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
         StartTimer();
     }
 
-    private void update()
+    private void Update()
     {
         //Do nothing if the timer has stopped or game is over.
         if (!isTimerRunning || (guessManager != null && guessManager.isGameOver)) return;
@@ -58,10 +58,10 @@ public class UIManager : MonoBehaviour
         //Count down time.
         currentTime -= Time.deltaTime;
 
-        //1. Update the Pixel Progress Bar using the assets built in value.
+        //1. Update the Pixel Progress Bar using the standard fillAmount.
         if (pixelProgressBarSlider != null)
         {
-            pixelProgressBarSlider.value = Mathf.Clamp01(currentTime / maxTime);
+            pixelProgressBarSlider.fillAmount = currentTime / maxTime; 
         }
 
         //2. Update the Mins:Sec display on screen without milliseconds.
@@ -72,6 +72,14 @@ public class UIManager : MonoBehaviour
         {
             TriggerTimeout();
         }
+    }
+
+    public void StartTimer()
+    {
+        if (maxTime <= 0f) maxTime = 150f;
+        currentTime = maxTime;
+        UpdateTimerDisplay(); 
+        isTimerRunning = true;
     }
 
     public void StopTimer()
@@ -85,8 +93,8 @@ public class UIManager : MonoBehaviour
 
         //Setting up the format so theres no .00 in the timer.
         int mins = Mathf.FloorToInt(currentTime / 60f);
-        ins sec = Mathf.FloorToInt(currentTime % 60f);
-        timerCountdownText.text = string.Format("{0:00}:{1.00}", minutes, seconds);
+        int sec = Mathf.FloorToInt(currentTime % 60f);
+        timerCountdownText.text = string.Format("{0:00}:{1:00}", mins, sec);
     }
 
     private void TriggerTimeout()
@@ -96,7 +104,7 @@ public class UIManager : MonoBehaviour
 
         if (pixelProgressBarSlider != null)
         {
-            pixelProgressBarSlider.value = 0f;
+            pixelProgressBarSlider.fillAmount = 0f;
         }
 
         if (guessManager != null)
@@ -138,7 +146,7 @@ public class UIManager : MonoBehaviour
         if (playerInput != null)
         {
             playerInput.text = "";
-            playerInput.ActiveInputField();
+            playerInput.ActivateInputField();
         }
     }
 
@@ -149,7 +157,3 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
-/*
-
-
-*/
