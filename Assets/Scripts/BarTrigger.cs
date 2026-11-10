@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI; 
 
-public class AtmosphereTrigger : MonoBehaviour
+public class BarTrigger : MonoBehaviour
 {
     [Header("Visuals")]
     public Image backgroundObject; // Drag the background UI element here.
@@ -11,7 +11,7 @@ public class AtmosphereTrigger : MonoBehaviour
     // the first click needs to load Background 2 (index 1).
     private int currentStage = 1; 
 
-    public void NextAtmosphere() 
+    public void NextBar() 
     {
         // Only swap if we haven't reached the end of the array
         if (currentStage < backgroundImages.Length) 
