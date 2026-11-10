@@ -12,6 +12,13 @@ public class HintManager : MonoBehaviour
     private int givenHints = 0; 
     private int maxHints = 5; 
 
+    [Header("Expression Link")]
+    public BrunoExpressionManager brunoExpressionManager;
+
+    // Anti-spam timers
+    private float cooldownDuration = 1.5f; 
+    private float nextAllowedClickTime = 0f;
+
     private void Start()
     {
         // automatically loads the hints when the round starts
@@ -34,10 +41,17 @@ public class HintManager : MonoBehaviour
     
     public void randomHint() 
     {
+        if (Time.time < nextAllowedClickTime)
+        {
+            return; // Stops the click if 1.5 seconds haven't passed
+        }
+        nextAllowedClickTime = Time.time + cooldownDuration;
+
         // if they used all 5 hints (or the list is empty), Bruno roasts them
         if (givenHints >= maxHints || hintsUnused.Count == 0) 
         {
-            dialogueManager.SayOutOfHints(); 
+            dialogueManager.SayOutOfHints();
+            if (brunoExpressionManager != null) brunoExpressionManager.ShowRandomTalkingExpression(); 
             if (guessManager != null) guessManager.TriggerGameOver();
             return; 
         }
@@ -46,6 +60,11 @@ public class HintManager : MonoBehaviour
         int randomIndex = Random.Range(0, hintsUnused.Count);
         string hintChosen = hintsUnused[randomIndex];
         dialogueManager.SayHint(hintChosen); 
+
+        if (brunoExpressionManager != null)
+        {
+            brunoExpressionManager.ShowRandomTalkingExpression();
+        }
 
         // remove it so it doesn't repeat and tick the counter up
         hintsUnused.RemoveAt(randomIndex);
