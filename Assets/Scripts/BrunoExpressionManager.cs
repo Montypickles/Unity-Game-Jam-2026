@@ -19,7 +19,7 @@ public class BrunoExpressionManager : MonoBehaviour
         if (talkingSprites.Length > 0) //Making sure sprites has loaded to avoid crash.
         {
             int randomIndex = Random.Range(0, talkingSprites.Length); //creating a variable to make a list with the amount of sprites.
-            brunoDisplay.sprite = talkingSprite[randomIndex]; //creating a veriable to pick it at random.
+            brunoDisplay.sprite = talkingSprites[randomIndex]; //creating a veriable to pick it at random.
             if (resetTimer != null)
             {
                 StopCoroutine(resetTimer); //if theres already a timer going. this stops it, therefore spamming textbox wont glitch it out.

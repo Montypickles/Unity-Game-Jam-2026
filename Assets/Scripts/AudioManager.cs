@@ -1,4 +1,4 @@
-using System.Collection;
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -14,8 +14,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip gameplayMusic; //Fades in for GameState.
 
     [Header("Sound Effects")]
-    public AudioCLip buttonSFX;
-    public AudioCLip brunoDialogueSFX;
+    public AudioClip buttonSFX;
+    public AudioClip brunoDialogueSFX;
 
     [Header("Settings")]
     public float fadeDuration = 1.0f; //How many seconds the fade will take

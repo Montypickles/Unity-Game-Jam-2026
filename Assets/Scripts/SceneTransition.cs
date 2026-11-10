@@ -56,6 +56,6 @@ public class SceneTransition : MonoBehaviour
         fadeImage.color = color;
 
         //Load game scene (MAKE SURE THIS SCENE IS ADDED TO THE BUILD SETTINGS!!!)
-        SceneManager.LoadScene("Game State");
+        SceneManager.LoadScene("Into");
     }
 }
