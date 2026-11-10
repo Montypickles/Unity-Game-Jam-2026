@@ -10,6 +10,14 @@ public class TargetManager : MonoBehaviour { //Makes the script be attachable to
         SelectRandomRound(); //Triggers the custom logic, in order to pick the level (the lucky number)
     }
     
+    void Start()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.TransitionToGameplayMusic();
+        }
+    }
+
     public void SelectRandomRound() //Function: randomly picks the game.
     {
         if (roundAvailable == null || roundAvailable.Length == 0) return;
