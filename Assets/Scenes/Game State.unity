@@ -654,6 +654,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 952342342}
   hintsRemainingText: {fileID: 1817527103}
   guessManager: {fileID: 255656795}
+  brunoExpressionManager: {fileID: 0}
 --- !u!1001 &298483335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1673,7 +1674,7 @@ Transform:
   m_GameObject: {fileID: 634207788}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.5046, y: -1.0874, z: 0}
+  m_LocalPosition: {x: -4.5046, y: -1.12, z: 0}
   m_LocalScale: {x: 0.49820578, y: 0.50333095, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
