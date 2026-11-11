@@ -2191,25 +2191,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
   brunoSpeechBubble: {fileID: 227957854}
   greetingDialogue:
-  - Meow
+  - 'Let''s make this quick so you can go back to being a disappointment somewhere else.   '
+  - "Oh good, the idiot found out how to start the game. Don\u2019t hurt yourself with the keyboard."
+  - I was told the user would have at least average intelligence.
+  - There is only one goal. To guess the lucky number. Or is that too difficult?
+  - "Guess my lucky number based on facts i know about them\u2026 if youre smart enough."
+  - Let's play, I'll try not to die of boredom.
   idleBanter:
-  - Dumbshit
+  - Half your time is gone. Has your brain just given up?
+  - 'I can practically hear the rusty gears in your head grinding to a halt. '
+  - 'Are you paralysed by incompetence or did you forget how a keyboard works? '
+  - 'Staring at the screen won''t help solve the question. '
+  - 'Time is slipping away, just like every opportunity you have ever had.   '
+  - 'Make a decision before the timer flatlines and takes it with you. '
+  - "You are just sitting there\u2026 weathering away. "
+  - Are you having a little nap?
   gameOverInsults:
-  - ur a potato
+  - Get Away From me
   winDialogue:
-  - Im a pedo
+  - 'You got it? We both know you just guessed. Get that smug look off your face. '
+  - 'There is no way someone of your intellect level guessed the number on purpose. '
+  - 'Wow, do you actually feel proud you managed to guess the number? '
+  - 'I''m guessing that was a mistake? Well done? '
+  - "You won. Don\u2019t expect me to celebrate it. I pretty much gave you the answer. "
   tooLowInsults:
-  - smash
+  - Too Low. I mean pathetically small. Just like your future prospects.
+  - Wrong, I know it may be hard for you but can you think of a bigger number.
+  - 'Too Low. Are you generally this bad? '
+  - 'I know your standards are usually low, but let''s not project it onto our guess shall we? '
+  - Stop inputting your GCSE Maths score and think higher.
   tooHighInsults:
-  - I like younger people
+  - 'Too High. We are looking for a simple number not a tally of your lifelong failures. '
+  - 'Why did that hint make you guess high? Were you dropped as a child?   '
+  - Too Big. Are you overcompensating for something or is there just nothing going on in that hollow head of yours.
+  - Too High, honestly interacting with you is like trying to get a brick wall to communicate.
+  - Overshot by a mile.The only thing that should drop faster then your guess is your sense of worth after that answer.
   blankInputInsults:
-  - Slow fucker
+  - 'Clicking a button with an empty box? You can''t be this stupid?   '
+  - Guessing with no guess? Revolutionary.
+  - Did you just think it in your head and forget to type?
+  - Nothing? You guessed nothing? Do you just have a low IQ or?
+  - I realise pushing keys might be a complex motor skill for you, but you do actually have to put something in the box.
   letterInputInsults:
-  - Deaf twat
+  - "Letters\u2026 You typed letters in a numbers game. Do you have a degree in stupidity? "
+  - 'This level of incompetence just has to be self taught. '
+  - 'That''s not a number you chud. We are looking for a number. Do you know what that is? '
+  - Here is a free hint, the numbers are at the top of the keyboard.
+  - Did you just not pay attention in Primary School?
+  - '  Genuinely how could you be this incompetent. '
   outOfHintsInsults:
-  - Ima do u one
+  - 'It literally says no hints remaining, why are you asking for more? '
+  - "  I\u2019d give you another clue but it's funny watching you fail. "
+  - I have practically spoon fed you the answer and you want more hints?
+  - Are you blind? There are no more hints?
+  - 'Look at you, begging for scraps? '
+  - "Do i need to explain the concept of the \u20180\u2019 next to \u201CRemaining Hints:\u201D"
+  - "\u2026Do you really need more? "
   timeoutInsults:
-  - Slow fuck
+  - Zero. You actually ran out of time? At least attempt it?
+  - Times up. Did you malfunction or is absolute paralysis just your default state? Pathetic.
+  - My nan would have done better. And she passed away in 2023.
+  - I've genuinely seen children do better at guessing a number.
+  - You do realise there is a time limit right.
+  - At least put something random? Letting the timer run out is just pathetic.
+  - "Wow, you didn't even manage to get through all the hints\u2026"
+  - You truly are a black hole where intellect goes to die.
+  - Absolute clown behaviour.
+  - That's it, the timer expired. And so has my tolerance for your incompetence.
   finalStrikeInsults:
   - Give me a sandwich
 --- !u!4 &952342343
