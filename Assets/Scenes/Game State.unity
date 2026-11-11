@@ -608,20 +608,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GuessManager
   targetManager: {fileID: 1391033970}
   playerInput: {fileID: 1298783854}
-  feedbackText: {fileID: 227957854}
   uiManager: {fileID: 134887134}
-  missingInputBanter:
-  - missing
-  notNumberBanter:
-  - not number
-  winBanter:
-  - u won
-  tooLowBanter:
-  - low
-  tooHighBanter:
-  - high
-  gameOverBanter:
-  - fuck uuuuuuuu
+  dialogueManager: {fileID: 952342342}
   isGameOver: 0
 --- !u!4 &255656796
 Transform:
@@ -2207,7 +2195,13 @@ MonoBehaviour:
   - "You are just sitting there\u2026 weathering away. "
   - Are you having a little nap?
   gameOverInsults:
-  - Get Away From me
+  - Ha, loser.
+  - 'I GUESS you weren''t smart enough to figure it out. '
+  - "I know you\u2019re used to losing so at least you can say you're consistent. "
+  - Not much of a problem solver are you.
+  - "So\u2026 are we just going to pretend this didn't happen and you start again or?"
+  - "Your guessing skills aren\u2019t very good are they? "
+  - 'Would that attempt even warrant a participation trophy?  '
   winDialogue:
   - 'You got it? We both know you just guessed. Get that smug look off your face. '
   - 'There is no way someone of your intellect level guessed the number on purpose. '
@@ -2259,7 +2253,7 @@ MonoBehaviour:
   - Absolute clown behaviour.
   - That's it, the timer expired. And so has my tolerance for your incompetence.
   finalStrikeInsults:
-  - Give me a sandwich
+  - TestFinalStrike
 --- !u!4 &952342343
 Transform:
   m_ObjectHideFlags: 0
@@ -4791,7 +4785,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.6500244}
+  m_AnchoredPosition: {x: 0, y: 1.6499023}
   m_SizeDelta: {x: 0, y: -3.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2097202539

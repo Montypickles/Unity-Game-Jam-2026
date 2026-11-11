@@ -1,69 +1,65 @@
 using UnityEngine;
-using TMPro; // textmeshpro stuff
+using TMPro;
 
-public class GuessManager : MonoBehaviour 
+public class GuessManager : MonoBehaviour
 {
-    public TargetManager targetManager; 
-    public TMP_InputField playerInput; 
-    public TextMeshProUGUI feedbackText; 
+    public TargetManager targetManager;
+    public TMP_InputField playerInput;
     public UIManager uiManager;
+    public DialogueManager dialogueManager;
 
-    [Header("Brunos Banter List Scripts: Guess Manager")]
-    public string[] missingInputBanter; 
-    public string[] notNumberBanter; 
-    public string[] winBanter; 
-    public string[] tooLowBanter; 
-    public string[] tooHighBanter; 
-    public string[] gameOverBanter; 
-
-    private int failedAttempts = 0; 
-    public bool isGameOver = false; // master lock to freeze the game
+    private int failedAttempts = 0;
+    public bool isGameOver = false;
 
     void Start()
     {
-        if (targetManager == null) targetManager = FindAnyObjectByType<TargetManager>();
-        if (uiManager == null) uiManager = FindAnyObjectByType<UIManager>();
+        if (targetManager == null)
+            targetManager = FindAnyObjectByType<TargetManager>();
+
+        if (uiManager == null)
+            uiManager = FindAnyObjectByType<UIManager>();
+
+        if (dialogueManager == null)
+            dialogueManager = FindAnyObjectByType<DialogueManager>();
     }
 
     public void CheckGuess()
     {
-        // if the game ended, ignore all button clicks
         if (isGameOver) return;
 
-        // if they didn't type anything
-        if (string.IsNullOrEmpty(playerInput.text))
+        // Empty input
+        if (string.IsNullOrWhiteSpace(playerInput.text))
         {
-            feedbackText.text = missingInputBanter[Random.Range(0, missingInputBanter.Length)];
-            return;    
+            dialogueManager.SayBlankInput();
+            return;
         }
 
-        // catch letters and symbols
-        int playerGuess; 
-        bool isNumber = int.TryParse(playerInput.text, out playerGuess); 
-
-        if (isNumber == false) 
+        // Invalid number
+        if (!int.TryParse(playerInput.text, out int playerGuess))
         {
-            feedbackText.text = notNumberBanter[Random.Range(0, notNumberBanter.Length)];
-            playerInput.text = ""; 
-            return; 
+            dialogueManager.SayLetterInput();
+            playerInput.text = "";
+            return;
         }
 
+        // Ensure a round exists
         if (targetManager != null && targetManager.roundCurrent == null)
         {
             targetManager.SelectRandomRound();
         }
-        
-        if (targetManager == null || targetManager.roundCurrent == null) return;
-       
-       
-        // grab the target number
+
+        if (targetManager == null || targetManager.roundCurrent == null)
+            return;
+
         int correctNumber = targetManager.roundCurrent.luckyNumber;
 
-        // win state
+        // Correct guess
         if (playerGuess == correctNumber)
         {
             isGameOver = true;
             playerInput.interactable = false;
+
+            dialogueManager.SayWin();
 
             uiManager.StopTimer();
             uiManager.ShowWinPanel();
@@ -71,31 +67,29 @@ public class GuessManager : MonoBehaviour
             return;
         }
 
-        // add a strike
+        // Incorrect guess
         failedAttempts++;
 
-        // 5 strikes and you're out
+        // Fifth incorrect guess
         if (failedAttempts >= 5)
         {
-            feedbackText.text = gameOverBanter[Random.Range(0, gameOverBanter.Length)];
+            dialogueManager.SayFinalStrike();
             TriggerGameOver();
-            return; 
+            return;
         }
 
-        // too small
         if (playerGuess < correctNumber)
         {
-            feedbackText.text = tooLowBanter[Random.Range(0, tooLowBanter.Length)];
+            dialogueManager.SayTooLow();
         }
-        // too big
-        else if (playerGuess > correctNumber)
+        else
         {
-            feedbackText.text = tooHighBanter[Random.Range(0, tooHighBanter.Length)];
+            dialogueManager.SayTooHigh();
         }
 
-        // clear the box for next time
         playerInput.text = "";
     }
+
     public void TriggerGameOver()
     {
         if (isGameOver) return;
@@ -108,18 +102,4 @@ public class GuessManager : MonoBehaviour
             uiManager.ShowLosePanel();
         }
     }
-
-    /*
-    private void Update()
-    {
-        
-        //If they hit enter the input is taken
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            CheckGuess();
-            playerInput.ActivateInputField(); //Keeps typing Curser active.
-        }
-       
-    }
-    */
 }

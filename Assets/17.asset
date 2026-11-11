@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82ca4788651804a4b91fa5ae36cff323, type: 3}
+  m_Name: 17
+  m_EditorClassIdentifier: Assembly-CSharp::NumberData
+  luckyNumber: 17
+  hints:
+  - "It\u2019s a two-digit positive integer.\r\n"
+  - 'It''s a whole number less than twenty.
+
+'
+  - 'It''s the seventh prime number.
+
+'
+  - 'Has heavy relation to the number eight.
+
+'
+  - 'The sum of the first four prime numbers.
+
+'
+  - 'Atomic number of a highly toxic gas.
+
+'
+  - The exact number of syllables strictly required to compose a traditional Japanese death poem.
+  - 'The exact number of years a periodical cicada waits in darkness.
+
+'
+  - 'The number of the final Apollo mission.
+
+'
+  - "Its Roman numeral is a cursed anagram for the Latin phrase \u201CI am dead\u201D.\r\n"
+  - 'The exact number of facial muscles required to force a human smile.
+
+'
+  - 'I hope you don''t have Heptadecaphobia.
+
+'
+  - 'The days the cursed king drifted before the sea God shattered his wooden raft.
+
+'
+  - 'Ancient Greek cults despised this number for severing perfect mathematical harmony.
+
+'
+  insults:
+  - 
+  successReply:
+  - 

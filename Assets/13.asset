@@ -14,8 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NumberData
   luckyNumber: 13
   hints:
-  - Friday
+  - "It\u2019s an odd number.\r\n"
+  - 'The number is greater than 9.
+
+'
+  - 'The sixth prime number.
+
+'
+  - "In a hexadecimal system, the exact integer is represented by \u201CD\u201D.\r\n"
+  - 'In a standard Major Arcana tarot deck which number is assigned to the death lock.
+
+'
+  - 'The number of guests seated at the table hours before the ultimate betrayal.
+
+'
+  - 'Convert binary string 1101 into a decimal integer.
+
+'
+  - 'Friday promises misfortune.
+
+'
+  - 'The square room of one hundred and sixty-nine.
+
+'
+  - "The exact numbers of fullmoons in a year. \r\n"
+  - 'Atomic number of cold, conductive metal used to construct a modern autopsy table.
+
+'
+  - 'The numerical value of the fear known as Triskaidekaphobia. '
+  - 'Only exists on a 24 hour digital clock, not a traditional 12 hour clock.
+
+'
+  - 'The exact number of lunar cycles in a year, sacred to the Goddess of Witchcraft.
+
+'
+  - 'The numerical rank of the Serpent Bearer, the banished sign of the zodiac.
+
+'
   insults:
-  - DIHHHHHHKHEAD
+  - 
   successReply:
-  - MILK MY TITTIES
+  - 

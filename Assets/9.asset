@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82ca4788651804a4b91fa5ae36cff323, type: 3}
+  m_Name: 9
+  m_EditorClassIdentifier: Assembly-CSharp::NumberData
+  luckyNumber: 9
+  hints:
+  - 'A single integer.
+
+'
+  - 'Has relation to a nursery rhyme (give me a high, give me a low.)
+
+'
+  - 'In Greek myth, the number of days and nights an anvil would fall from Heaven to Earth.
+
+'
+  - 'Number of realms connected by the World Tree in Norse mythology.
+
+'
+  - 'How many circles of Hell must a damned soul fall through in Dante''s Inferno?
+
+'
+  - 'I like cats. Meow.
+
+'
+  - 'Multiply it by anything, sum of digits, and it always decays back into itself.
+
+'
+  - 'The inverted, isolated digit from the Mark the Beast.
+
+'
+  - 'Calculate the square root of eighty-one.
+
+'
+  - "Convert the binary string \u20181001\u2019 into decimal.\r\n"
+  - 'Subtract the square of four from the square of five.
+
+'
+  insults:
+  - 
+  successReply:
+  - 

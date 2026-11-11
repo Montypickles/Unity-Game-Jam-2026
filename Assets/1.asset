@@ -14,8 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NumberData
   luckyNumber: 1
   hints:
-  - Piece
+  - 'It''s a positive number. Honestly I might as well have given you the answer.
+
+'
+  - You can answer the question by clicking keys on your keyboard.
+  - It's an odd number, neither a prime number nor composite.
+  - Perfectly divided into every other number.
+  - In Roman numerals it stands alone to represent a number.
+  - Nothing changes with isolated integer
+  - Take absolutely any non-zero number and raise it to the power of zero.
+  - The square of this number is exactly equal to the cube.
+  - If you calculate the cosine of zero degrees.
+  - 'Translate this binary bit into a ASCII character: 0011 0001.'
+  - It's the atomic number of the lightest element in the universe.
+  - Solve the exact integer that represents absolute certainty in probability.
+  - The exact number of coins owed to the ferryman of the dead.
+  - 'Precise number of eyes shared by the three withered hags who weave your wretched fate.
+
+'
   insults:
-  - UR maidenless
+  - 
   successReply:
-  - put one hand up if ur being abused
+  - 

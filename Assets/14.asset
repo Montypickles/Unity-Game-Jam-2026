@@ -14,8 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NumberData
   luckyNumber: 14
   hints:
-  - Test
+  - "It\u2019s a whole number made up of two digits.\r\n"
+  - 'It''s a positive number between zero and fifty.
+
+'
+  - "Convert the hexadecimal character \u201CE\u201D into an integer.\r\n"
+  - 'A composite integer whose divisors are: one, two and seven.'
+  - 'Identify the value on the pH scale, representing absolute, flesh-dissolving alkalinity.
+
+'
+  - 'What is the exact number of lines composing a traditional Shakespearean sonnet?
+
+'
+  - 'The number of pieces the ancient God of the dead was hacked into.
+
+'
+  - 'Number of days the moon takes to bleed darkness.
+
+'
+  - 'The number of individual phalanx bones inside the cold.
+
+'
+  - 'How many individual phalanx bones inside one of your hands?
+
+'
+  - The number of facial bones hidden beneath your skin.
+  - "The corpses left bleeding when the twin Gods punished Niobe\u2019s pride.\r\n"
+  - "Exact tally of doomed Athenian tributes fed to the Labyrinth\u2019s beast.\r\n"
   insults:
-  - Fuck you
+  - 
   successReply:
-  - Fuck you ur not having my street waffles U GIMP
+  - 
